@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    networks:
+      - graylog
+
+  opensearch:
+    image: opensearchproject/opensearch:2.14.0
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms256m -Xmx256m" # heap hanya 256MB
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - graylog
+
+  graylog:
+    image: graylog/graylog:6.0
+    restart: unless-stopped
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=SomeSecretPepper123
+      - GRAYLOG_ROOT_PASSWORD_SHA2=eb79a1ff6c7d85b6ad0d1b3a33c919373f5c3621bb782dbf38716e013e71dde3
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+      - GRAYLOG_ELASTICSEARCH_HOSTS=http://opensearch:9200
+      - "GRAYLOG_SERVER_JAVA_OPTS=-Xms256m -Xmx256m" # heap hanya 256MB
+    depends_on:
+      - mongo
+      - opensearch
+    ports:
+      - "9000:9000" # Web UI
+      - "12201:12201/udp" # GELF UDP input
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - graylog
+
+networks:
+  graylog:
+    driver: bridge
