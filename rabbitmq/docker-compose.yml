@@ -6,10 +6,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: Rahasiaku!23
-      RABBITMQ_VM_MEMORY_HIGH_WATERMARK: 0.6
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitnet
 
