@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:3-management-alpine
     container_name: rabbitmq
     ports:
       - "5672:5672"
@@ -9,6 +9,7 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: Rahasiaku!23
+      RABBITMQ_VM_MEMORY_HIGH_WATERMARK: 0.6
     networks:
       - rabbitnet
 
