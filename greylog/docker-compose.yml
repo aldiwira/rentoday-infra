@@ -29,8 +29,8 @@ services:
     image: graylog/graylog:6.0
     restart: unless-stopped
     environment:
-      - GRAYLOG_PASSWORD_SECRET=SomeSecretPepper123
-      - GRAYLOG_ROOT_PASSWORD_SHA2=eb79a1ff6c7d85b6ad0d1b3a33c919373f5c3621bb782dbf38716e013e71dde3
+      - GRAYLOG_PASSWORD_SECRET=vdXwk2R9MnCySkwlyQ3Bfuz2M1INohVdD7PJtNgpPjdxHTV6JneqI3m3A1sjJotZcy6sKMWa89oAj6VAs7xj1hgRnHcKV0Rt
+      - GRAYLOG_ROOT_PASSWORD_SHA2=6e7a854fcf159185ba680487f8379dedef5fd944a8d48de967566be73f96cf5a
       - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
       - GRAYLOG_ELASTICSEARCH_HOSTS=http://opensearch:9200
       - "GRAYLOG_SERVER_JAVA_OPTS=-Xms256m -Xmx256m" # heap hanya 256MB
