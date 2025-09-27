@@ -1,0 +1,31 @@
+{
+  "vhosts": [{ "name": "password-bot" }],
+  "users": [
+    {
+      "name": "botuser",
+      "password": "Rahasiaku!25",
+      "tags": "administrator"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "botuser",
+      "vhost": "password-bot",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "policies": [
+    {
+      "vhost": "password-bot",
+      "name": "lazy-queues",
+      "pattern": ".*",
+      "definition": {
+        "queue-mode": "lazy"
+      },
+      "priority": 0,
+      "apply-to": "queues"
+    }
+  ]
+}
